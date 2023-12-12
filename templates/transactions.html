@@ -1,0 +1,157 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Top-up
+{% endblock %}
+
+{% block main %}
+    <h3>Top Up</h3>
+    <form action="/transactions" class="alignForm" method="post">
+        <div class="mx-1">
+            <select name="top_up" class="form-select form-control mx-auto" >
+                <option disabled selected>Select Game Credit</option>
+                <option value="Valorant">Valorant Points</option>
+                <option value="Genshin Impact">Genesis Crystals</option>
+                <option value="Wild Rift">Wild Cores</option>
+                <option value="League of Legends">Riot Points</option>
+            </select>
+        </div>
+        <div class="mx-1">
+            <select name="stock_id" class="form-select form-control mx-auto" >
+                <option disabled selected> Select Sim Card</option>
+                {% for row in sim_names %}
+                    <option value="{{ row['stock_id'] }}">{{ row["sim_name"] }} BAL:{{ row["balance"] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mx-1">
+            <input autocomplete="off" class="form-control mx-auto w-auto" name="amount" placeholder="Amount" type="number">
+        </div>
+        <div class="mx-1">
+            <input autocomplete="off" class="form-control mx-auto w-auto" name="load" placeholder="Load" type="number">
+        </div>
+        <div class="mx-1">
+            <input autocomplete="off" class="form-control mx-auto w-auto" name="discount" placeholder="Discount" type="number">
+        </div>
+        <button class="submitButton btn btn-primary mx-1" type="submit">Submit</button>
+    </form>
+
+    <div class="line mt-5"></div>
+
+    <h3 class="mt-5">Transactions</h3>
+    <form action="/transactions" class="alignForm" method="get">
+        <div class="mx-1">
+            <select name="filter" class="form-select form-control mx-auto" >
+                <option disabled selected>Filter by:</option>
+                <option value="game">Game</option>
+                <option value="sim">Sim</option>
+                <option value="date">Date</option>
+            </select>
+        </div>
+        <div class="mx-1">
+            <input autocomplete="off" class="form-control mx-auto w-auto" name="search" placeholder="Search" type="text">
+        </div>
+        <button class="submitButton btn btn-primary mx-1" type="submit">Go</button>
+    </form>
+
+    <div class= "mt-2 editContainer2">
+        {% if not toggle %}<a href="/transactions?filter={{ filter }}&search={{ search }}&toggle=edit"><button type="button" class="btn btn-secondary btn-sm">Edit</button></a>{% endif %}
+
+        {% if toggle %}
+            <button type="button" class="btn btn-danger mx-2 btn-sm" data-bs-toggle="modal" data-bs-target="#clearAllTransactions">Clear All</button></a>
+
+            <div class="modal fade" id="clearAllTransactions" tabindex="-1" aria-labelledby="clearAllTransactionsLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="clearAllTransactionsLabel">Confirmation</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to clear all transactions?
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <a href="/clearAllTransactions"><button type="button" class="btn btn-danger">Clear All</button></a>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <a href="/transactions?filter={{ filter }}&search={{ search }}"><button type="button" class="btn btn-secondary btn-sm">Close</button></a>
+        {% endif %}
+    </div>
+
+    <table class="table mt-3">
+        <thead class="table-group-divider">
+            <tr>
+                <th scope="col">Game</th>
+                <th scope="col">Sim</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Load</th>
+                <th scope="col">Discount</th>
+                <th scope="col">Profit</th>
+                <th scope="col">Date</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            {% for row in database %}
+                <tr>
+                    <td>{{ row["top_up_type"] }}</td>
+                    <td>{{ row["sim_name"] }}</td>
+                    <td>{{ row["transaction_amount"] }}</td>
+                    <td>{{ row["transaction_load"] }}</td>
+                    <td>{{ row["discount"] }}</td>
+                    <td>{{ row["profit"] | dec }}</td>
+                    <td>{{ row["transaction_date"] }}</td>
+                    {% if toggle %}
+                        <td class="tdSmall">
+                            <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#undo{{ row['transaction_id'] }}{{ row['stock_id'] }}">
+                                Undo
+                            </button>
+
+                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete{{ row['transaction_id'] }}">
+                                Delete
+                            </button>
+                        </td>
+
+                        <div class="modal fade" id="undo{{ row['transaction_id'] }}{{ row['stock_id'] }}" tabindex="-1" aria-labelledby="label{{ row['transaction_id'] }}{{ row['stock_id'] }}" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="label{{ row['transaction_id'] }}{{ row['stock_id'] }}">Confirmation</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to undo this transaction?
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <a href="/undoTransaction?transaction_id={{ row['transaction_id'] }}&stock_id={{ row['stock_id'] }}"><button type="button" class="btn btn-danger">Undo</button></a>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="modal fade" id="delete{{ row['transaction_id'] }}" tabindex="-1" aria-labelledby="label{{ row['transaction_id'] }}" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="label{{ row['transaction_id'] }}">Delete Stock</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to delete this transaction?
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <a href="/deleteTransaction?transaction_id={{ row['transaction_id'] }}"><button type="button" class="btn btn-danger">Delete</button></a>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

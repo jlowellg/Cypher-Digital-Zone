@@ -1,0 +1,102 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Calculator
+{% endblock %}
+
+{% block main %}
+    <h3 class="mb-3">Valorant Points Calculator</h3>
+
+    <form action="/calculator" class="alignForm" method="get">
+        <div class="mx-1">
+            <input autocomplete="off" class="form-control mx-auto w-auto" name="amount" placeholder="Amount" type="number">
+        </div>
+        <button class="submitButton btn btn-primary mx-1" type="submit">Calculate</button>
+    </form>
+
+    <div class="calcContainer mx-auto">
+        <table class="table table-bordered table-hover calcTable mt-4">
+            <tr>
+                <th class="tdEqual">Amount:</th>
+                <td class="tdEqual">{{ base_amount | vp }}</td>
+            </tr>
+            <tr>
+                <th class="tdEqual">Price:</th>
+                <td class="tdEqual">{{ price | php }}</td>
+            </tr>
+            {% if not price == 'No exact amount.' and session["user_id"] %}
+                {% if vp_5800 or vp_2850 or vp_1650 or vp_790 or vp_380 or vp_125 %}
+                    <tr>
+                        <th class="tdEqual">Load:</th>
+                        <td class="tdEqual">{{ load }}</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2" class="text-center">Breakdown:</th>
+                    </tr>
+
+                    {% if vp_5800 %}
+                        <tr>
+                            <th class="tdEqual">5800 VP:</th>
+                            <td class="tdEqual">{{ vp_5800 }}</td>
+                        </tr>
+                    {% endif %}
+
+                    {% if vp_2850 %}
+                        <tr>
+                            <th class="tdEqual">2850 VP:</th>
+                            <td class="tdEqual">{{ vp_2850 }}</td>
+                        </tr>
+                    {% endif %}
+
+                    {% if vp_1650 %}
+                        <tr>
+                            <th class="tdEqual">1650 VP:</th>
+                            <td class="tdEqual">{{ vp_1650 }}</td>
+                        </tr>
+                    {% endif %}
+
+                    {% if vp_790 %}
+                        <tr>
+                            <th class="tdEqual">790 VP:</th>
+                            <td class="tdEqual">{{ vp_790 }}</td>
+                        </tr>
+                    {% endif %}
+
+                    {% if vp_380 %}
+                        <tr>
+                            <th class="tdEqual">380 VP:</th>
+                            <td class="tdEqual">{{ vp_380 }}</td>
+                        </tr>
+                    {% endif %}
+
+                    {% if vp_125 %}
+                        <tr>
+                            <th class="tdEqual">125 VP:</th>
+                            <td class="tdEqual">{{ vp_125 }}</td>
+                        </tr>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+
+            {% if reco_1 or reco_2 %}
+                <tr>
+                    <th colspan="2" class="text-center">Recommendation/s:</th>
+                </tr>
+                {% if reco_1 %}
+                    <tr>
+                        <td class="tdEqual">{{ reco_1 | vp }}</td>
+                        <td class="tdEqual">{{ price_1 | php }}</td>
+                    </tr>
+                {% endif %}
+
+                {% if reco_2 %}
+                    <tr>
+                        <td class="tdEqual">{{ reco_2 | vp }}</td>
+                        <td class="tdEqual">{{ price_2 | php }}</td>
+                    </tr>
+                {% endif %}
+            {% endif %}
+        </table>
+    </div>
+{% endblock %}
+

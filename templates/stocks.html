@@ -1,0 +1,120 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Stocks
+{% endblock %}
+
+{% block main %}
+    <h3>Add Stocks</h3>
+    <form action="/stocks" class="alignForm" method="post">
+        <div class="mx-1">
+            <select name="stock_id" class="form-select form-control mx-auto" >
+                <option disabled selected> Select Sim Card</option>
+                {% for row in sim_names %}
+                    <option value="{{ row['stock_id'] }}">{{ row["sim_name"] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mx-1">
+            <input autocomplete="off" class="form-control mx-auto w-auto" name="amount" placeholder="Amount" type="text">
+        </div>
+        <button class="submitButton btn btn-primary mx-1" type="submit">Add</button>
+    </form>
+
+    <div class="mt-3 mb-5 small text-center text-muted">
+        Use another sim card? <a href="/addSim">Add</a>
+    </div>
+
+    <div class="line"></div>
+    <div class="editContainer1 mt-3">
+        <h1 class="center">Stocks</h1>
+
+        <div>
+            {% if not toggle %}<a href="/stocks?toggle=edit"><button type="button" class="btn btn-secondary btn-sm">Edit</button></a>{% endif %}
+
+            {% if toggle %}
+                <button type="button" class="btn btn-danger mx-2 btn-sm" data-bs-toggle="modal" data-bs-target="#clearAllStocks">Clear All</button></a>
+
+                <div class="modal fade" id="clearAllStocks" tabindex="-1" aria-labelledby="clearAllLabelStocks" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="clearAllStocksLabel">Confirmation</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to clear all stocks?
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <a href="/clearAllStock"><button type="button" class="btn btn-danger">Clear All</button></a>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <a href="/stocks"><button type="button" class="btn btn-secondary btn-sm">Close</button></a>
+            {% endif %}
+        </div>
+    </div>
+
+    <table class="table">
+        <thead class="table-group-divider">
+            <tr>
+                <th scope="col">Sim</th>
+                <th scope="col">Network</th>
+                <th scope="col">Number</th>
+                <th scope="col">Balance</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            {% for row in database %}
+                <tr>
+                    <td>{{ row["sim_name"] }}</td>
+                    <td>{{ row["network"] }}</td>
+                    <td>{{ row["sim_number"] }}</td>
+                    <td>{{ row["balance"] | dec }} </td>
+                    {% if toggle %}
+                        <td class="tdSmall">
+                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete{{ row['stock_id'] }}">
+                                Delete
+                            </button>
+                        </td>
+
+                        <div class="modal fade" id="delete{{ row['stock_id'] }}" tabindex="-1" aria-labelledby="label{{ row['stock_id'] }}" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="label{{ row['stock_id'] }}">Confirmation</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to delete {{ row['sim_name'] }}?
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <a href="/deleteStock?stock_id={{ row['stock_id'] }}"><button type="button" class="btn btn-danger">Delete</button></a>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot class="table-group-divider">
+            <tr>
+                <td></td>
+                <td></td>
+                <th>Total:</th>
+                <td>{{ total_bal | dec  }}</td>
+                {% if toggle %}<td></td>{% endif %}
+            </tr>
+        </tfoot>
+    </table>
+
+
+
+    <div class="mt-3 mb-5 small text-center text-muted">
+        Check stock history? <a href="/history">Click here.</a>
+    </div>
+{% endblock %}

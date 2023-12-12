@@ -1,0 +1,134 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Prices
+{% endblock %}
+
+{% block main %}
+    <div class="pricesMain">
+        <div class="logoContainer bgBlue">
+            <img src="/static/images/priceIcon1.png" class="imgFluid">
+        </div>
+
+        <div class="pricesContainer outlineBlue">
+            <table class="table table-bordered table-hover pricesTable">
+                <tbody class="fontBlue pricesFont">
+                  {% for row in valorant %}
+                    <tr>
+                      <td><img src="/static/images/miniIcon1.png" class="currencyIcon">{{ row["amount"] }}</td>
+                      <td><img src="/static/images/pesoIcon.png" class="currencyIcon">{{ row["price"] }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="small text-center text-muted">
+      Need specific amount? <a href="/calculator">VP Calculator</a>
+    </div>
+    
+    <hr class="marginBot">
+
+    <div class="pricesMain flexRev">
+        <div class="pricesContainer outlineOrange">
+            <table class="table table-bordered table-hover pricesTable">
+                <tbody class="fontBlue pricesFont">
+                  {% for row in genshin %}
+                    <tr>
+                      <td><img src="/static/images/miniIcon2.png" class="currencyIcon">{{ row["amount"] }}</td>
+                      <td><img src="/static/images/pesoIcon.png" class="currencyIcon">{{ row["price"] }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="logoContainer bgOrange">
+          <img src="/static/images/priceIcon2.png" class="imgFluid">
+        </div>
+    </div>
+
+    <hr class="marginBot">
+
+    <div class="pricesMain">
+        <div class="logoContainer bgBlue">
+            <img src="/static/images/priceIcon3.png" class="imgFluid">
+        </div>
+
+        <div class="pricesContainer outlineBlue">
+            <table class="table table-bordered table-hover pricesTable">
+                <tbody class="fontBlue pricesFont">
+                  {% for row in mlbb %}
+                    <tr>
+                      <td><img src="/static/images/miniIcon3.png" class="currencyIcon">{{ row["amount"] }}</td>
+                      <td><img src="/static/images/pesoIcon.png" class="currencyIcon">{{ row["price"] }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <hr class="marginBot">
+
+    <div class="pricesMain flexRev">
+        <div class="pricesContainer outlineOrange">
+            <table class="table table-bordered table-hover pricesTable">
+                <tbody class="fontBlue pricesFont">
+                  {% for row in wild_rift %}
+                    <tr>
+                      <td><img src="/static/images/miniIcon4.png" class="currencyIcon">{{ row["amount"] }}</td>
+                      <td><img src="/static/images/pesoIcon.png" class="currencyIcon">{{ row["price"] }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="logoContainer bgOrange">
+          <img src="/static/images/priceIcon4.png" class="imgFluid">
+        </div>
+    </div>
+
+    <hr class="marginBot">
+
+    <div class="pricesMain">
+        <div class="logoContainer bgBlue">
+            <img src="/static/images/priceIcon5.png" class="imgFluid">
+        </div>
+
+        <div class="pricesContainer outlineBlue">
+            <table class="table table-bordered table-hover pricesTable">
+                <tbody class="fontBlue pricesFont">
+                  {% for row in riot_points %}
+                    <tr>
+                      <td><img src="/static/images/miniIcon5.png" class="currencyIcon">{{ row["amount"] }}</td>
+                      <td><img src="/static/images/pesoIcon.png" class="currencyIcon">{{ row["price"] }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <hr class="marginBot">
+
+    <div class="pricesMain flexRev">
+        <div class="pricesContainer outlineOrange">
+            <table class="table table-bordered table-hover pricesTable">
+                <tbody class="fontBlue pricesFont">
+                  {% for row in garena_shells %}
+                    <tr>
+                      <td><img src="/static/images/miniIcon6.png" class="currencyIcon">{{ row["amount"] }}</td>
+                      <td><img src="/static/images/pesoIcon.png" class="currencyIcon">{{ row["price"] }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="logoContainer bgOrange">
+          <img src="/static/images/priceIcon6.png" class="imgFluid">
+        </div>
+    </div>
+{% endblock %}

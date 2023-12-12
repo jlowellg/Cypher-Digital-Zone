@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Order
+{% endblock %}
+
+{% block main %}
+    <h2>How to order?</h2>
+    <div>
+        <p>To place an order, please send us a message on our Facebook page.</p>
+    </div>
+    <div>
+        <a href="https://www.facebook.com/cypher.digital.zone" target="blank" class="cdzFont"><img src="/static/images/cdzLogo.png" class="orderLogo"></a>
+    </div>
+    <div>
+        <a href="https://www.facebook.com/cypher.digital.zone" target="blank" class="cdzFont">Cypher Digital Zone</a>
+    </div>
+    <div class="orderContainer mx-auto">
+        <table class="table table-bordered mt-3">
+            <tr>
+                <th class="tdEqual">For direct top up:</th>
+                <th class="tdEqual">For in-game vouchers:</th>
+            </tr>
+            <tr>
+                <td class="tdEqual">Send us your IGN and game ID</td>
+                <td class="tdEqual">Login your account</td>
+            </tr>
+            <tr>
+                <td class="tdEqual">Select the amount you need</td>
+                <td class="tdEqual">Select the amount you need</td>
+            </tr>
+            <tr>
+                <td class="tdEqual">Send your payment</td>
+                <td class="tdEqual">Send your payment</td>
+            </tr>
+            <tr>
+                <td class="tdEqual">Wait for your order to be processed</td>
+                <td class="tdEqual">Wait for your order to be processed</td>
+            </tr>
+            <tr>
+                <td class="tdEqual">Your order will be automatically sent to your account</td>
+                <td class="tdEqual">Reedem your game voucher using the code we sent</td>
+            </tr>
+        </table>
+    </div>
+    <h3 class="mt-5">Payment Methods:</h3>
+    <div class="payment">
+        <img src="/static/images/gcash.png" class="paymentLogo">
+        <img src="/static/images/maya.png" class="paymentLogo">
+    </div>
+{% endblock %}

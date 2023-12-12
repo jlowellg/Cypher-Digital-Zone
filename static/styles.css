@@ -1,0 +1,320 @@
+html {
+    height: 100vh;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100%
+}
+
+/* navigation bar */
+.navBar {
+    align-items: center;
+    background-color: #0E253D;
+    display: flex;
+    height: 80px;
+    justify-content: space-between;
+    padding: 20px 2%;
+}
+
+
+#cdzMini {
+    display: none;
+}
+
+.navContent1 {
+    align-items: center;
+    display: flex;
+}
+
+.navContent2 {
+    align-items: center;
+    display: flex;
+}
+
+.navButton {
+    background-color: transparent;
+    border: none;
+    color: #FD622C;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+}
+
+.orangeButton {
+    color: #fff;
+    background-color: #FD622C;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin-left: 20px;
+}
+
+@media (max-width: 1000px) {
+    #cdzLarge {
+      display: none;
+    }
+
+    #cdzMini {
+        display: inline;
+    }
+}
+
+@media (max-width: 500px) {
+    .navBar {
+        justify-content: center;
+    }
+}
+
+/* footer */
+.footerBar {
+    align-items: center;
+    background-color: #0E253D;
+    height: 50px;
+    color: #ffff;
+    padding: 20px 2%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+}
+
+.footContainer1 {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    font-size: 12px;
+}
+
+.footContent1 {
+    align-items: center;
+    display: flex;
+    text-decoration: none;
+    color: #ffff;
+}
+
+.footContent1:hover {
+    color: #FD622C;
+}
+
+.miniIcon {
+    max-width: 20px;
+    max-height: 20px;
+    margin-right: 5px;
+}
+
+
+/* make form flex */
+.alignForm {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+/* adjust width of select */
+.width {
+    max-width: 205px;
+}
+
+.line {
+    background-color: #FD622C;
+    height: 3px;
+}
+
+
+/* customize icons */
+.iconsContainer {
+    max-width: 1000px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.icons {
+    border-radius: 4px;
+    outline: 2px solid #FD622C;
+    margin: 20px;
+}
+
+/* Add font */
+
+.font1 {
+    font-family: 'Kdam Thmor Pro', sans-serif;
+    color: #0E253D;
+}
+
+.font2 {
+    font-family: 'Kdam Thmor Pro', sans-serif;
+}
+
+/* configure prices */
+.pricesMain{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.flexRev {
+    flex-wrap: wrap-reverse;
+}
+
+.logoContainer {
+    height: 100%;
+    width: 100%;
+    max-height: 500px;
+    max-width: 500px;
+    border-radius: 25px;
+}
+
+.bgBlue {
+    background-color: #0E253D;
+}
+
+.bgOrange {
+    background-color: #FD622C;
+}
+
+.outlineBlue {
+    outline: 5px solid #0E253D;
+    outline-offset: -5px;
+}
+
+.outlineOrange {
+    outline: 5px solid #FD622C;
+    outline-offset: -5px;
+}
+
+.pricesContainer {
+    align-items: center;
+    display: flex;
+    background-color: #FFFF;
+    border-radius: 25px;
+    height: auto;
+    padding: 0% 5%;
+    width: 700px;
+}
+
+.imgFluid {
+    width: 100%;
+    height: auto;
+}
+
+.marginBot {
+    margin-bottom: 25px;
+}
+
+@media (max-width: 1280px) {
+    .imgFluid {
+        width: 30%;
+        height: auto;
+    }
+    .logoContainer {
+        max-width: 700px;
+    }
+}
+
+/* configure items inside table */
+.currencyIcon {
+    max-width: 20px;
+    max-height: 20px;
+    margin-right: 5px;
+    margin-bottom: 3px
+}
+
+.pricesTable {
+    margin-top: 18px;
+}
+
+.pricesFont {
+    font-family: 'Kdam Thmor Pro', sans-serif;
+    font-size: 20px;
+    text-align: justify;
+    margin: 50%;
+}
+
+.fontBlue {
+    color: #0E253D;
+}
+
+.fontOrange {
+    color: #FD622C;
+}
+
+/* configure order page */
+.orderContainer {
+    max-width: 800px;
+}
+
+.tdEqual {
+    width: 50%;
+}
+
+.orderLogo {
+    max-width: 200px;
+    height: auto;
+}
+
+.cdzFont {
+    font-family: 'Kdam Thmor Pro', sans-serif;
+    font-size: 40px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #0E253D;
+}
+
+.cdzFont:hover {
+    color: #FD622C;
+}
+
+.payment {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.paymentLogo {
+    max-width: 120px;
+    height: auto;
+}
+
+/* configure about page */
+.aboutContainer {
+    max-width: 800px;
+    text-align: justify;
+}
+
+.indent{
+    text-indent: 20px;
+}
+
+/* configure calculator page */
+
+.calcContainer {
+    max-width: 400px;
+}
+
+.calcTable{
+    text-align: justify;
+    font-size: 20px;
+}
+
+/* configure stocks page */
+.editContainer1 {
+    align-items:center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.editContainer2 {
+    display:flex;
+    justify-content: right;
+}
+
+.tdSmall {
+    text-align: right;
+    width: 10%;
+}
+

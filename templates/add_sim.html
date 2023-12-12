@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add Sim Card
+{% endblock %}
+
+{% block main %}
+    <h3 class="mb-3">Add Sim Card</h3>
+    <form action="/addSim" method="post">
+
+        <select name="network" class="form-select form-control mx-auto mb-3 width" >
+            <option disabled selected> Select Network</option>
+            <option value="Smart">Smart</option>
+            <option value="Globe">Globe</option>
+            <option value="N/A">Other</option>
+        </select>
+
+        <div class="mb-3">
+            <input autocomplete="off" class="form-control mx-auto w-auto" name="sim_card_name" placeholder="Sim Card Name" type="text">
+        </div>
+        <div class="mb-3">
+            <input autocomplete="off" class="form-control mx-auto w-auto" name="number" placeholder="Number" type="number">
+        </div>
+        <div class="mb-3">
+            <input autocomplete="off" class="form-control mx-auto w-auto" name="balance" placeholder="Balance" type="number" step="0.01">
+        </div>
+        <button class="submitButton btn btn-primary" type="submit">Add</button>
+    </form>
+{% endblock %}

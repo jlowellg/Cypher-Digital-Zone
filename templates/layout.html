@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta name="viewport" content="initial-scale=1", width="device-width">
+
+        <title>CDZ | {% block title %}{% endblock %}</title>
+
+        <link href="/static/styles.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        {% if session["user_id"] %}
+            <nav class="navBar">
+                <div class="navContent1">
+                    <a class="cdzLogo" id="cdzLarge" href="/"><img src="/static/images/cdz3.png" alt="Cypher Digital Zone"></a>
+                    <a class="cdzLogo" id="cdzMini" href="/"><img src="/static/images/cdz4.png" alt="Cypher Digital Zone"></a>
+                </div>
+                <div class="navContent2">
+                    <a href="/"><button class="navButton">HOME</button></a>
+                    <a href="/prices"><button class="navButton">PRICES</button></a>
+                    <a href="/order"><button class="navButton">ORDER</button></a>
+                    <div class="dropdown">
+                        <button class="dropdown-toggle navButton orangeButton" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          ADMIN
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><span class="dropdown-item-text small text-center text-muted">user: {{ username }}</span></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/stocks">STOCKS</a></li>
+                            <li><a class="dropdown-item" href="/transactions">TOP-UP</a></li>
+                            <li><a class="dropdown-item" href="/analytics">ANALYTICS</a></li>
+                            <li><a class="dropdown-item" href="/logout">LOG OUT</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        {% else %}
+            <nav class="navBar" >
+                <a class="cdzLogo" id="cdzLarge" href="/"><img src="/static/images/cdz3.png" alt="Cypher Digital Zone"></a>
+                <a class="cdzLogo" id="cdzMini" href="/"><img src="/static/images/cdz4.png" alt="Cypher Digital Zone"></a>
+                <div class="navContent2">
+                    <a href="/"><button class="navButton">HOME</button></a>
+                    <a href="/prices"><button class="navButton">PRICES</button></a>
+                    <a href="/order"><button class="navButton">ORDER</button></a>
+                    <a href="/admin"><button class="orangeButton navButton">ADMIN</button></a>
+                </div>
+            </nav>
+        {% endif %}
+
+        {% if get_flashed_messages() %}
+            <header>
+                <div class="alert alert-secondary mb-0 text-center" role="alert">
+                    {{ get_flashed_messages() | join(" ") }}
+                </div>
+            </header>
+        {% endif %}
+
+        <header>
+            {% block homeHeader %}{% endblock %}
+        </header>
+
+        <main class="container-fluid py-5 text-center">
+            {% block main %}{% endblock %}
+        </main>
+
+        <footer class="footerBar">
+            <span class="font2">Get in the zone!</span>
+            <div class="footContainer1">
+                <a href="https://www.facebook.com/cypher.digital.zone" target="blank" class="footContent1"><img src="/static/images/fb2.png" class="miniIcon">facebook.com/cypher.digital.zone</a>
+                <span> | </span>
+                <a href="/about" class="footContent1"> About </a>
+            </div>
+        </footer>
+
+    </body>
+</html>
+

@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Analytics
+{% endblock %}
+
+{% block main %}
+    <div class="alignText">
+        <div>
+            <h3>Total Profit: {{ total_profit | php }} </h3>
+            <h3>Total Orders: {{ order_count }} </h3>
+            <div class="mb-4 small text-center text-muted">{{ profit_date }}</div>
+        </div>
+    </div>
+
+    <div class="line mt-3"></div>
+
+    <h4 class="mt-4">Filter Profit:</h4>
+
+    <form action="/analytics" method="get">
+        <label class="form-label">Date from:</label>
+        <div class="mb-3">
+            <input autocomplete="off" class="form-control mx-auto w-auto" name="filter_from" type="date">
+        </div>
+        <label class="form-label">Date to:</label>
+        <div class="mb-3">
+            <input autocomplete="off" class="form-control mx-auto w-auto" name="filter_to" type="date">
+        </div>
+        <button class="submitButton btn btn-primary mx-1" type="submit">Search</button>
+    </form>
+</div>
+{% endblock %}
